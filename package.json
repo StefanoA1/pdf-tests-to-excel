@@ -1,0 +1,21 @@
+{
+  "name": "pdf-tests-to-excel",
+  "version": "1.0.0",
+  "description": "converts pdf to desired excel format",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node dist/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "stefano acosta",
+  "license": "ISC",
+  "dependencies": {
+    "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.14",
+    "prettier": "^1.19.1",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2"
+  }
+}
