@@ -1,33 +1,27 @@
 import { createObjectCsvWriter as createCsvWriter } from "csv-writer";
 
 const csvWriter = createCsvWriter({
-  path: "out.csv",
   header: [
     { id: "name", title: "Name" },
     { id: "surname", title: "Surname" },
     { id: "age", title: "Age" },
     { id: "gender", title: "Gender" }
-  ]
+  ],
+  path: "out.csv"
 });
 
 const data = [
   {
-    name: "John",
-    surname: "Snow",
     age: 26,
-    gender: "M"
+    gender: "M",
+    name: "John",
+    surname: "Snow"
   },
   {
-    name: "Clair",
-    surname: "White",
     age: 33,
-    gender: "F"
-  },
-  {
-    name: "Fancy",
-    surname: "Brown",
-    age: 78,
-    gender: "F"
+    gender: "F",
+    name: "Clair",
+    surname: "White"
   }
 ];
 
