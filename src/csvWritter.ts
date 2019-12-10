@@ -1,16 +1,19 @@
 import { createObjectCsvWriter as createCsvWriter } from "csv-writer";
 
-const csvWriter = createCsvWriter({
+export const outputPath = "./results";
+export const outputFilename = "out.csv";
+
+export const csvWriter = createCsvWriter({
   header: [
     { id: "name", title: "Name" },
     { id: "surname", title: "Surname" },
     { id: "age", title: "Age" },
     { id: "gender", title: "Gender" }
   ],
-  path: "out.csv"
+  path: outputPath + outputFilename
 });
 
-const data = [
+export const data = [
   {
     age: 26,
     gender: "M",
@@ -25,6 +28,6 @@ const data = [
   }
 ];
 
-csvWriter
-  .writeRecords(data)
-  .then(() => console.log("The CSV file was written successfully"));
+// csvWriter
+//   .writeRecords(data)
+//   .then(() => console.log("The CSV file was written successfully"));
