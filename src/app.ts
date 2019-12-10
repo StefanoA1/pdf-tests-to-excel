@@ -5,16 +5,16 @@ const dataBuffer = fs.readFileSync("./test-reports/c72.pdf");
 
 pdf(dataBuffer).then(function(data) {
   // number of pages
-  console.log(data.numpages);
+  console.log("numpages: \n", data.numpages);
   // number of rendered pages
-  console.log(data.numrender);
+  console.log("numrender: \n", data.numrender);
   // PDF info
-  console.log(data.info);
+  console.log("info: \n", data.info);
   // PDF metadata
-  console.log(data.metadata);
+  console.log("metadata: \n", data.metadata);
   // PDF.js version
   // check https://mozilla.github.io/pdf.js/getting_started/
-  console.log(data.version);
+  console.log("version: \n", data.version);
   // PDF text
-  console.warn(data.text);
+  console.warn("text: \n", data.text);
 });
