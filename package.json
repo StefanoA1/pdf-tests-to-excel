@@ -4,7 +4,8 @@
   "description": "converts pdf to desired excel format",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node dist/app.js",
+    "build-ts": "npx tsc",
+    "start": "npx tsc && node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "stefano acosta",
