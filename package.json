@@ -11,7 +11,8 @@
   "author": "stefano acosta",
   "license": "ISC",
   "dependencies": {
-    "pdf-parse": "^1.1.1"
+    "pdf-parse": "^1.1.1",
+    "csv-writer": "^1.5.0"
   },
   "devDependencies": {
     "@types/node": "^12.12.14",
