@@ -3,22 +3,35 @@ import { ensureDirSync } from "fs-extra";
 import pdf from "pdf-parse";
 import { csvWriter, data, outputPath } from "./csvWritter";
 
+const testReportsFilePath = "./test-reports";
+
+fs.readdir(testReportsFilePath, (readErr, testReports) => {
+  for (const testReport of testReports) {
+    console.log("Test report: " + testReport);
+    // fs.stat(testReport, (statErr, stats) => {
+    //   console.log(testReport);
+    //   console.log(stats.size);
+    // });
+  }
+});
+
 const dataBuffer = fs.readFileSync("./test-reports/c72.pdf");
 
-pdf(dataBuffer).then(function(data) {
+// TODO: get pdfData types
+pdf(dataBuffer).then((pdfData: any) => {
   // number of pages
-  console.log("numpages: \n", data.numpages);
+  console.log("numpages: \n", pdfData.numpages);
   // number of rendered pages
-  console.log("numrender: \n", data.numrender);
+  console.log("numrender: \n", pdfData.numrender);
   // PDF info
-  console.log("info: \n", data.info);
+  console.log("info: \n", pdfData.info);
   // PDF metadata
-  console.log("metadata: \n", data.metadata);
+  console.log("metadata: \n", pdfData.metadata);
   // PDF.js version
   // check https://mozilla.github.io/pdf.js/getting_started/
-  console.log("version: \n", data.version);
+  console.log("version: \n", pdfData.version);
   // PDF text
-  console.warn("text: \n", data.text);
+  console.warn("text: \n", pdfData.text);
 });
 
 // ensureDirSync(this.settings.outDir);

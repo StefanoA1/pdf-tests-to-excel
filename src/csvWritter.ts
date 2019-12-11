@@ -12,8 +12,14 @@ export const csvWriter = createCsvWriter({
   ],
   path: outputPath + outputFilename
 });
+export interface IDataExample {
+  age: number;
+  gender: string;
+  name: string;
+  surname: string;
+}
 
-export const data = [
+export const data: IDataExample[] = [
   {
     age: 26,
     gender: "M",
