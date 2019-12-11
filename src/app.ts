@@ -22,16 +22,16 @@ for (const testReportName of testReportNameList) {
   // TODO: get pdfData types
   pdf(dataBuffer).then((pdfData: any) => {
     // number of pages
-    console.log("numpages: \n", pdfData.numpages);
+    // console.log("numpages: \n", pdfData.numpages);
     // number of rendered pages
-    console.log("numrender: \n", pdfData.numrender);
-    // PDF info
-    console.log("info: \n", pdfData.info);
+    // console.log("numrender: \n", pdfData.numrender);
+    // PDF title
+    console.log("title: \n", pdfData.info.Title);
     // PDF metadata
-    console.log("metadata: \n", pdfData.metadata);
+    // console.log("metadata: \n", pdfData.metadata);
     // PDF.js version
     // check https://mozilla.github.io/pdf.js/getting_started/
-    console.log("version: \n", pdfData.version);
+    // console.log("version: \n", pdfData.version);
     // PDF text
     console.warn("text: \n", pdfData.text);
   });

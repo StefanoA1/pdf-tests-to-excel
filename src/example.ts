@@ -233,25 +233,28 @@ R_MTU--R_NGA+±R_NGU++
 S_ORN-±S_URE--T_ESC--
 `;
 
-const regex = new RegExp(
+const antibioticGroupRegex = new RegExp(
   // tslint:disable-next-line: trailing-comma
   /Grupo\s*de\s*\s*test\s*de\s*antibiótico([\w\W]*)Marcadores\s*de\s*resistencia\s*/
 );
-const match = regex.exec(text);
-const antibiotics = match && match[1];
+const match = antibioticGroupRegex.exec(text);
+const antibioticsGroupTextBlob = match && match[1];
 // console.log(antibiotics);
 
-const regexAntib = new RegExp(
+const singleAntibioticRegex = new RegExp(
   // tslint:disable-next-line: trailing-comma
   /[SRIX]\s*[ABCOU]\s*\d*\s*[RX]?\s*[SRI]\s*([<>=]{0,2}[/\d,]+)([A-Z][a-zí]+[A-Z-]{0,2}[a-zí]+)\s*/g
 );
-let antibMatch = regexAntib.exec(antibiotics!);
+let singleAntibioticMatch = singleAntibioticRegex.exec(
+  antibioticsGroupTextBlob!
+);
 
 const antibMatches = [];
-while (antibMatch != null) {
-  antibMatch.shift();
-  antibMatches.push(antibMatch);
-  antibMatch = regexAntib.exec(antibiotics!);
+
+while (singleAntibioticMatch != null) {
+  singleAntibioticMatch.shift();
+  antibMatches.push(singleAntibioticMatch);
+  singleAntibioticMatch = singleAntibioticRegex.exec(antibioticsGroupTextBlob!);
 }
 
 console.log(antibMatches);
