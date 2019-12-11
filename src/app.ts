@@ -5,9 +5,12 @@ import { csvWriter, data, outputPath } from "./csvWritter";
 
 const testReportsFilePath = "./test-reports";
 
-fs.readdir(testReportsFilePath, (readErr, testReports) => {
-  for (const testReport of testReports) {
-    console.log("Test report: " + testReport);
+const testReportNameList: string[] = [];
+
+fs.readdir(testReportsFilePath, (readErr, fileNames) => {
+  for (const fileName of fileNames) {
+    console.log("Test report: " + fileName);
+    testReportNameList.push(fileName);
     // fs.stat(testReport, (statErr, stats) => {
     //   console.log(testReport);
     //   console.log(stats.size);
