@@ -258,3 +258,47 @@ while (singleAntibioticMatch != null) {
 }
 
 console.log(antibMatches);
+// CEPA    FECHARECOGIDA  SERVICIO    TIPO DE MUESTRA     EDAD    GÉNERO
+function calculateAge(birthday: string): number {
+  // birthday is a date
+  if (birthday === "Missing Data") {
+    return NaN;
+  }
+  const birthdayDate = new Date(birthday);
+  const ageDifMs = Date.now() - birthdayDate.getTime();
+  const ageDate = new Date(ageDifMs); // miliseconds from epoch
+  return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
+
+const patientDataBlockRegex = new RegExp(
+  /QUITO\s*-\s*ECUADOR\s*([\w\W]*)Antibioterapia:\s*Número de aislado:Ninguno\s*Crecimiento y detecciónTipos de tests:\s*Nombre del test:UROCULTIVO/
+);
+const patientBlockMatch = patientDataBlockRegex.exec(text);
+const patientBlockText = patientBlockMatch && patientBlockMatch[1];
+// console.log(antibiotics);
+
+const recollectionDayRegex = new RegExp(
+  /Fecha de recibo:\s*([\d\/]*)\s*[\d:]*Fecha de recogida:/
+);
+const recollectionDayMatch =
+  recollectionDayRegex.exec(patientBlockText!)![1] || "Missing Data";
+
+const serviceNameRegex = new RegExp(
+  /muestra:\s*([A-Za-zÀ-ÖØ-öø-ÿ\s*]*)Servicio de/
+);
+const serviceNameMatch =
+  serviceNameRegex.exec(patientBlockText!)![1] || "Missing Data";
+
+const sampleTypeRegex = new RegExp(
+  /N° de acceso:\s*([A-Za-zÀ-ÖØ-öø-ÿ]*)Tipo de muestra:/
+);
+const sampleTypeMatch =
+  sampleTypeRegex.exec(patientBlockText!)![1] || "Missing Data";
+
+const genderAndAgeRegex = new RegExp(/\d+\s*(\w*)Sexo del paciente:([\d\/]*)/);
+const genderAndAgeMatches = genderAndAgeRegex.exec(patientBlockText!);
+
+const genderMatch = genderAndAgeMatches![1] || "Missing Data";
+const ageMatch = calculateAge(genderAndAgeMatches![2] || "Missing Data");
+
+console.log(ageMatch);
