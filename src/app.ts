@@ -1,7 +1,8 @@
 import fs from "fs";
 import { ensureDirSync } from "fs-extra";
 import pdf from "pdf-parse";
-import { csvWriter, data, outputPath } from "./csvWritter";
+import { csvWriter, outputPath, TestAnalisisRow } from "./csvWritter";
+import { parseResult } from "./example";
 import { readFilesFromPath } from "./fileReader";
 
 const testReportsFilePath = "./test-reports";
@@ -13,28 +14,22 @@ const testReportsFilePath = "./test-reports";
 const testReportNameList: string[] = readFilesFromPath(testReportsFilePath);
 
 console.log("files: " + testReportNameList);
+const rows: TestAnalisisRow[] = [];
+async function iterateFiles() {
+  for (const testReportName of testReportNameList) {
+    const dataBuffer = fs.readFileSync(
+      testReportsFilePath + "/" + testReportName
+    );
 
-for (const testReportName of testReportNameList) {
-  const dataBuffer = fs.readFileSync(
-    testReportsFilePath + "/" + testReportName
-  );
-
-  // TODO: get pdfData types
-  pdf(dataBuffer).then((pdfData: any) => {
-    // number of pages
-    // console.log("numpages: \n", pdfData.numpages);
-    // number of rendered pages
-    // console.log("numrender: \n", pdfData.numrender);
-    // PDF title
-    console.log("title: \n", pdfData.info.Title);
-    // PDF metadata
-    // console.log("metadata: \n", pdfData.metadata);
-    // PDF.js version
-    // check https://mozilla.github.io/pdf.js/getting_started/
-    // console.log("version: \n", pdfData.version);
-    // PDF text
-    console.warn("text: \n", pdfData.text);
-  });
+    // TODO: get pdfData types
+    const pdfData = await pdf(dataBuffer);
+    console.log(testReportName.replace(".pdf", ""));
+    rows.push(parseResult(pdfData.text, testReportName.replace(".pdf", "")));
+  }
+  console.log("rows", rows);
+  csvWriter
+    .writeRecords(rows)
+    .then(() => console.log("The CSV file was written successfully"));
 }
 
 // ensureDirSync(this.settings.outDir);
@@ -42,6 +37,6 @@ for (const testReportName of testReportNameList) {
 // TODO: ouput on config file
 ensureDirSync(outputPath);
 
-csvWriter
-  .writeRecords(data)
-  .then(() => console.log("The CSV file was written successfully"));
+iterateFiles().then(() => {
+  console.log("Ok.");
+});
