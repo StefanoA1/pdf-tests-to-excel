@@ -1,68 +1,77 @@
 import { createObjectCsvWriter as createCsvWriter } from "csv-writer";
+/**
+ * Types Object.assign JS method. Use it simply as typedObjectAssign(obj1, obj2)
+ * it will detect the Class autmatically or provide it by typedObjectAssign<YourClass>(obj1, obj2)
+ *
+ */
+export function typedObjectAssign<SpecificClass>(
+  targetObj: SpecificClass,
+  sourceObj: Partial<SpecificClass>
+) {
+  // tslint:disable-next-line: prefer-object-spread
+  return Object.assign(targetObj, sourceObj);
+}
 
 export const outputPath = "./results/";
 export const outputFilename = "out.csv";
-
+export const missingDataMarker = "Missing Data";
 // CEPA	FECHA RECOGIDA	SERVICIO	TIPO DE MUESTRA 	EDAD	GÉNERO
 /**
  * Directly in spanish as the ouput is going to be used solely in that
  * language.
  */
 export class TestAnalisisRow {
-  public cepa: string = "";
+  public cepa: string = missingDataMarker;
 
-  /**
-   * Fecha de recogida
-   */
-  public fechaDeRecogida: string = "";
+  public fechaDeRecogida: string = missingDataMarker;
 
-  public servicio: string = "";
+  public servicio: string = missingDataMarker;
 
-  public tipoDeMuestra: string = "";
+  public tipoDeMuestra: string = missingDataMarker;
 
-  public edad: string = "";
+  public edad: string = missingDataMarker;
 
-  public genero: string = "";
+  public genero: string = missingDataMarker;
 
-  public Amikacina: string = "";
+  public Amikacina: string = missingDataMarker;
 
-  public "Amoxicilina-Clavulanato": string = "";
+  public "Amoxicilina-Clavulanato": string = missingDataMarker;
 
-  public Aztreonam: string = "";
+  public Aztreonam: string = missingDataMarker;
 
-  public Cefalotina: string = "";
+  public Cefalotina: string = missingDataMarker;
 
-  public Cefepima: string = "";
+  public Cefepima: string = missingDataMarker;
 
-  public Cefoxitina: string = "";
+  public Cefoxitina: string = missingDataMarker;
 
-  public Ceftazidima: string = "";
+  public Ceftazidima: string = missingDataMarker;
 
-  public Ceftriaxona: string = "";
+  public Ceftriaxona: string = missingDataMarker;
 
-  public Cefuroxima: string = "";
+  public Cefuroxima: string = missingDataMarker;
 
-  public Ciprofloxacino: string = "";
+  public Ciprofloxacino: string = missingDataMarker;
 
-  public Colistina: string = "";
+  public Colistina: string = missingDataMarker;
 
-  public Ertapenem: string = "";
+  public Ertapenem: string = missingDataMarker;
 
-  public Gentamicina: string = "";
+  public Gentamicina: string = missingDataMarker;
 
-  public Imipenem: string = "";
+  public Imipenem: string = missingDataMarker;
 
-  public Levofloxacino: string = "";
+  public Levofloxacino: string = missingDataMarker;
 
-  public Meropenem: string = "";
+  public Meropenem: string = missingDataMarker;
 
-  public "Nitrofurantoína": string = "";
+  public "Nitrofurantoína": string = missingDataMarker;
 
-  public "Piperacilina-Tazobactam": string = "";
+  public "Piperacilina-Tazobactam": string = missingDataMarker;
 
-  public Tigeciclina: string = "";
+  public Tigeciclina: string = missingDataMarker;
 
-  public "Trimetoprim-Sulfametoxazol": string = "";
+  public "Trimetoprim-Sulfametoxazol": string = missingDataMarker;
 }
 
 interface IHeader {
