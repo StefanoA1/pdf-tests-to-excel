@@ -33,7 +33,7 @@ export function parseResult(
   );
   const match = antibioticGroupRegex.exec(text);
   if (!match) {
-    console.error("--X-- file: " + fileName + "could not be parsed. FAIL");
+    console.error("--X-- file: " + fileName + " could not be parsed. FAIL");
     return {
       data,
       opRes: false,
@@ -50,7 +50,7 @@ export function parseResult(
     antibioticsGroupTextBlob!
   );
   if (!singleAntibioticMatch[1]) {
-    console.error("--X-- file: " + fileName + "could not be parsed. FAIL");
+    console.error("--X-- file: " + fileName + " could not be parsed. FAIL");
     return {
       data,
       opRes: false,
@@ -79,7 +79,7 @@ export function parseResult(
 
   if (!patientBlockText) {
     console.error(
-      "--X-- file: " + fileName + "user data could not be parsed. FAIL"
+      "--X-- file: " + fileName + " user data could not be parsed. FAIL"
     );
     return {
       data,
@@ -134,7 +134,7 @@ export function parseResult(
   data.genero = genderMatch;
   data.edad = ageMatch.toString();
   // console.log("parsed data", data);
-  console.info("file:" + fileName + "parsed successfully. OK");
+  console.info("file:" + fileName + " parsed successfully. OK");
   return {
     data,
     opRes: true
